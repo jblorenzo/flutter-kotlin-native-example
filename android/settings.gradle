@@ -13,3 +13,8 @@ plugins.each { name, path ->
     include ":$name"
     project(":$name").projectDir = pluginDirectory
 }
+
+include ':common'
+project(":common").projectDir = new File("../common")
+
+enableFeaturePreview('GRADLE_METADATA')
