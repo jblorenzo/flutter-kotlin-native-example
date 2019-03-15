@@ -15,9 +15,10 @@ class MainActivity : FlutterActivity() {
         super.onCreate(savedInstanceState)
         GeneratedPluginRegistrant.registerWith(this)
 
-        MethodChannel(flutterView, "/api").setMethodCallHandler { methodCall, result ->
+        var channel = MethodChannel(flutterView, "/api")
+        channel.setMethodCallHandler { methodCall, result ->
             processMethodChannel(methodCall.method ?: "",
-                    methodCall.arguments,
+                    methodCall.arguments ?: emptyList<String>(),
                     { s -> result.success(s) },
                     { e, e1, e2 -> result.error(e, e1, e2) }
             )}
